@@ -123,7 +123,7 @@ class UNet():
                 return 0.00005
 
         lr_schedule = LearningRateScheduler(scheduler)
-        model_checkpoint = ModelCheckpoint('unet_membrane.hdf5', monitor='loss',verbose=1, save_best_only=True)
+        model_checkpoint = ModelCheckpoint('unet_neighbor.hdf5', monitor='loss',verbose=1, save_best_only=True)
 
         self.model.fit(train_set, steps_per_epoch=steps_per_epoch, epochs=epochs, callbacks=[model_checkpoint, lr_schedule])
 
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     else:
         ## if already trained, load the model
         unet = UNet()
-        unet.load_trained_model('unet_membrane.hdf5')
+        unet.load_trained_model('unet_neighbor.hdf5')
     
     ## test on testing set
     test_set = Dataset.get_test_set(Dataset, os.path.join(args.dataset, 'test'))
